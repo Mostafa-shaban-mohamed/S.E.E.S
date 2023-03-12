@@ -1,0 +1,122 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>S.E.E.S - @ViewData["Title"]</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/SourceCode.styles.css" asp-append-version="true" />
+</head>
+
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-SEES mb-3">
+            <div class="container-fluid">
+                <a class="logo-sees" asp-area="" asp-controller="Home" asp-action="Index">S.E.E.S</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse"
+                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                    <ul class="navbar-nav flex-grow-1">
+                        <li class="nav-item">
+                            <a class="text-SEES" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                        </li>
+                        @if (!User.Identity.IsAuthenticated)
+                        {
+                            <li class="nav-item">
+                                <a class="text-SEES" asp-area="" asp-controller="Home" asp-action="Login">Login</a>
+                            </li>
+                        }
+                    </ul>
+                    @* There is User who logged in *@
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <ul class="navbar-nav user-section-SEES">
+                            <li>
+                                <a class="text-SEES" asp-area="" asp-controller="Home"
+                                asp-action="RedirectProfile">Welcome @User.Identity.Name</a>
+                            </li>
+                            <li>
+                                <a class="btn btn-danger" asp-area="" asp-controller="Home" asp-action="Logout">Logout</a>
+                            </li>
+                        </ul>
+                    }
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @if(User.Identity.IsAuthenticated && @ViewData["Title"] != "Home Page"){
+                <div class="col-md-12">
+                    @Html.Partial("_sideBar")
+                    @RenderBody()
+                </div>
+            }else{
+                @RenderBody()
+            }
+            
+        </main>
+    </div>
+
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2023 - S.E.E.S - Designed By <a href="https://mostafa-shaban-mohamed.github.io/Index.html">Mostafa Sh3ban</a>
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script> //Exam
+        $(document).ready(function () {
+            //hide all options
+            if ($("#ExamType").val() == "Exam") {
+                $(".Exam").show();
+            } else {
+                $(".Exam").hide();
+            }
+
+            //check any change of quesType ddl
+            $("#ExamType").change(function () {
+                var value = $(this).val();
+                if (value == "Exam") { //MultiChoice
+                    //show multichoice fields
+                    $(".Exam").show();
+                } else { //written
+                    $(".Exam").hide();
+                }
+            })
+        })
+    </script>
+    @if(ViewData["Title"] == "Create a Question" || ViewData["Title"] == "Edit The Question")
+    {<script> //Question
+        $(document).ready(function () {
+            //hide all options
+            if ($("#QuestionType").val() == "MultiChoice") {
+                $(".MultiChoice").show();
+            } else if ($("#QuestionType").val() == "Written") {
+                $(".MultiChoice").hide();
+            } else {
+                $(".MultiChoice").hide();
+            }
+
+            //check any change of quesType ddl
+            $("#QuestionType").change(function () {
+                var value = $(this).val();
+                if (value == "MultiChoice") { //MultiChoice
+                    //show multichoice fields
+                    $(".MultiChoice").show();
+                } else { //written
+                    $(".MultiChoice").hide();
+                }
+            })
+        })
+    </script>
+    }
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+
+</html>

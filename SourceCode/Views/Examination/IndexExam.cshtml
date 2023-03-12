@@ -1,0 +1,51 @@
+@model IEnumerable<SourceCode.Models.ExamTbl>;
+
+@{
+    ViewData["Title"] = "Exams";
+}
+
+<div class="grid-SEES col-md-9">
+    <div>
+        @Html.ActionLink("New Exam +", "CreateOrEditExam", "Examination", null, new {@class = "btn btn-primary"})
+    </div>
+    <div>
+        <table class="table-SEES">
+            <tr>
+                <th>Course</th>
+                <th>Type</th>
+                <th>Total Mark</th>
+                <th></th>
+            </tr>
+            @foreach (var exam in Model)
+            {
+                if(User.IsInRole("Lecturer")){
+                    <tr>
+                        <td>@exam.CourseId</td>
+                        <td>@exam.Type</td>
+                        <td>@exam.TotalMark</td>
+                        <td>
+                            @Html.ActionLink("Edit Exam", "CreateOrEditExam", new { id = exam.ExamId },
+                             new {@class = "btn btn-primary"}) &emsp;
+                            @Html.ActionLink("View Answers", "GetAnswers", "Lecturer",
+                             new { id = exam.ExamId }, new {@class = "btn btn-primary"})
+                        </td>
+                    </tr>    
+                }else{ 
+                    if(exam.AvailabilityTime < DateTime.Now && exam.ReleaseTime > DateTime.Now){
+                        <tr>
+                            <td>@exam.CourseId</td>
+                            <td>@exam.Type</td>
+                            <td>@exam.TotalMark</td>
+                            <td>
+                                @Html.ActionLink("Take Exam", "TakeExam", "Student", new { examId = exam.ExamId },
+                                 new { @class = "btn btn-primary"})
+                            </td>
+                        </tr>
+                    }else if(DateTime.Now < exam.AvailabilityTime.Value.AddDays(2.0d)){
+                        <tr><td>this Exam will be available at @exam.AvailabilityTime.Value.ToString()</td></tr>
+                    }
+                }
+            }
+        </table>
+    </div>
+</div>

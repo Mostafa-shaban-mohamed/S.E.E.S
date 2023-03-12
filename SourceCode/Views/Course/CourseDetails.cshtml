@@ -1,0 +1,36 @@
+@model SourceCode.Models.CourseTbl
+
+@{
+    ViewData["Title"] = Model.Name;
+}
+
+<div class="col-md-9 display-SEES">
+    <div>
+        <div class="display-group-SEES">
+            <p class="display-text-SEES">Course ID</p>
+            <p class="display-text-SEES">@Model.Id</p>
+        </div>
+        <div class="display-group-SEES">
+            <p class="display-text-SEES">Name</p>
+            <p class="display-text-SEES">@Model.Name</p>
+        </div>
+        <div class="display-group-SEES">
+            <p class="display-text-SEES">Teacher</p>
+            <p class="display-text-SEES">@Model.Teacher</p>
+        </div>
+        <div class="display-group-SEES">
+            <p class="display-text-SEES">Level</p>
+            <p class="display-text-SEES">@Model.EdLevel</p>
+        </div>
+        <div class="display-group-SEES">
+            <p class="display-text-SEES">Documents</p>
+            <p class="display-text-SEES">@Model.Pdfs</p>
+        </div>
+        <div class="display-group-SEES">
+            @if(User.IsInRole("Lecturer")){
+                @Html.ActionLink("Upload Files", "UploadFiles", new { id = Model.Id }, new { @class = "btn btn-primary"}) 
+            }
+            &emsp; @Html.ActionLink("Course Documents", "CourseFiles", new { id = Model.Id }, new { @class = "btn btn-primary"})
+        </div>
+    
+</div>

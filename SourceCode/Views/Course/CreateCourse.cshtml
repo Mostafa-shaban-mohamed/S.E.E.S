@@ -1,0 +1,31 @@
+@model SourceCode.Models.CourseTbl
+@using SourceCode.Models
+
+@{
+    ViewData["Title"] = "Create New Course";
+}
+
+<div class="col-md-9 crud-SEES">
+    <form asp-action="CreateCourse" method="post">
+        <div class="form-group">
+            <label asp-for="Id">Course ID</label>
+            <input asp-for="Id" class="form-control" placeholder="Please Enter Course ID" required/> 
+        </div>
+        <div class="form-group">
+            <label asp-for="Name">Course</label>
+            <input asp-for="Name" type="text" class="form-control" placeholder="Please Enter Course Name" required/> 
+        </div>
+        <div class="form-group">
+            <label asp-for="Teacher">Teacher</label>
+            @Html.DropDownList("Teacher", ViewBag.TeacherList as SelectList, new { @class = "form-control"})
+        </div>
+        <div class="form-group">
+            <label asp-for="EdLevel">Level</label>
+            @Html.DropDownListFor(model => model.EdLevel, new EdList().list,  new { @class = "form-control"} )  
+        </div>
+        <div>
+            <button type="submit" class="btn btn-primary">Submit</button> &emsp;
+            <a asp-action="Index" asp-controller="Course" class="btn btn-primary">Back To List</a>
+        </div>
+    </form>
+</div>

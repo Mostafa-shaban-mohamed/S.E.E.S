@@ -1,0 +1,56 @@
+@model SourceCode.Models.StudentTbl
+
+@{
+    ViewData["Title"] = Model.Name;
+}
+
+<div class="col-md-9 display-SEES">
+    <div>
+        @if (Model.Image != null)
+        {
+            string imreBase64Data = Convert.ToBase64String(Model.Image);
+            string imgDataURL = string.Format("data:image/png;base64,{0}", imreBase64Data);
+
+            <img src="@imgDataURL" alt="Avatar" class="profile-image-SEES" />
+        }
+        else
+        {
+            <img src="~/img/person.jpg" class="profile-image-SEES" alt="Avatar" />
+        }
+    </div>
+    <div>
+        <div class="display-group-SEES">
+            <p class="display-text-SEES">Student ID</p>
+            <p class="display-text-SEES">@Model.Id</p>
+        </div>
+
+        <div class="display-group-SEES">
+            <p class="display-text-SEES">Name</p>
+            <p class="display-text-SEES">@Model.Name</p>
+        </div>
+
+        <div class="display-group-SEES">
+            <p class="display-text-SEES">Email</p>
+            <p class="display-text-SEES">@Model.Email</p>
+        </div>
+
+        <div class="display-group-SEES">
+            <p class="display-text-SEES">Class</p>
+            <p class="display-text-SEES">@Model.Class</p>
+        </div>
+
+        <div class="display-group-SEES">
+            <p class="display-text-SEES">Level</p>
+            <p class="display-text-SEES">@Model.EdLevel</p>
+        </div>
+
+        <div class="display-btn-group-SEES">
+            @Html.ActionLink("Edit Profile", "AddOrEdit", new { id = @Model.Id }, new {@class = "btn btn-primary"})
+            &emsp;
+            @Html.ActionLink("Display My Courses", "UserCourses", "RegisteredCourse", new { EdLevel = @Model.EdLevel
+            },
+            new {@class = "btn btn-primary"})
+        </div>
+    </div>
+</div>
+

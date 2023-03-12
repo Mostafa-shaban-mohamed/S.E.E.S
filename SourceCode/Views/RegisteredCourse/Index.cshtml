@@ -1,0 +1,35 @@
+@model IEnumerable<SourceCode.Models.RegisteredCoursesTbl>
+
+@{
+    ViewData["Title"] = "Registered Course";
+}
+
+<table>
+    <tr>
+        <td>Level</td>
+        <td>Course (1) </td>
+        <td>Course (2) </td>
+        <td>Course (3) </td>
+        <td>Course (4) </td>
+        <td>Course (5) </td>
+        <td>Course (6) </td>
+        <td>Course (7) </td>
+
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.Id</td>
+            <td>@item.Course01</td>
+            <td>@item.Course02</td>
+            <td>@item.Course03</td>
+            <td>@item.Course04</td>
+            <td>@item.Course05</td>
+            <td>@item.Course06</td>
+            <td>@item.Course07</td>
+        </tr>
+    }
+</table>
+<div>
+    @Html.ActionLink("Back To Home Page", "Index", "Home", null, new { @class = "btn btn-danger" })
+</div>

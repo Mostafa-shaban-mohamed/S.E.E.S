@@ -1,0 +1,117 @@
+@model SourceCode.Models.AnswerTbl
+@using SourceCode.Models
+
+@{
+    ViewData["Title"] = "Answer Paper";
+
+    ExamTbl exam = ViewBag.Exam as ExamTbl;
+
+}
+
+<div class="col-md-9 crud-SEES">
+    <h3>Exam</h3>
+    <form asp-action="GradeAnswer" method="post">
+        @Html.Hidden("ExamId", exam.ExamId)
+        @Html.HiddenFor(m => m.AnsId)
+        @Html.HiddenFor(m => m.StuCode)
+        <input type="hidden" id="ExamType" value="@exam.Type" />
+        <div class="form-group">
+            <Label for="Ans1">@exam.Q01Navigation.QuesTitle</Label>
+            <input type="text" class="form-control" id="Ans1" name="Ans1" value="@Model.Ans1" disabled />
+            @if (exam.Q01Navigation.CorrectCh != null)
+            {
+                <p>Correct Answer: @exam.Q01Navigation.CorrectCh</p>
+            }
+        </div>
+
+        <div class="form-group">
+            <Label for="Ans2">@exam.Q02Navigation.QuesTitle</Label>
+            <input type="text" class="form-control" id="Ans2" name="Ans2" value="@Model.Ans2" disabled />
+            @if (exam.Q02Navigation.CorrectCh != null)
+            {
+                <p>Correct Answer: @exam.Q02Navigation.CorrectCh</p>
+            }
+        </div>
+
+        <div class="form-group">
+            <Label for="Ans3">@exam.Q03Navigation.QuesTitle</Label>
+            <input type="text" class="form-control" id="Ans3" name="Ans3" value="@Model.Ans3" disabled />
+            @if (exam.Q03Navigation.CorrectCh != null)
+            {
+                <p>Correct Answer: @exam.Q03Navigation.CorrectCh</p>
+            }
+        </div>
+
+        <div class="form-group">
+            <Label for="Ans4">@exam.Q04Navigation.QuesTitle</Label>
+            <input type="text" class="form-control" id="Ans4" name="Ans4" value="@Model.Ans4" disabled />
+            @if (exam.Q04Navigation.CorrectCh != null)
+            {
+                <p>Correct Answer: @exam.Q04Navigation.CorrectCh</p>
+            }
+        </div>
+
+        <div class="form-group">
+            <Label for="Ans5">@exam.Q05Navigation.QuesTitle</Label>
+            <input type="text" class="form-control" id="Ans5" name="Ans5" value="@Model.Ans5" disabled />
+            @if (exam.Q05Navigation.CorrectCh != null)
+            {
+                <p>Correct Answer: @exam.Q05Navigation.CorrectCh</p>
+            }
+        </div>
+
+        @* Exam Questions *@
+        @if (exam.Type == "Exam")
+        {
+            <div class="form-group Exam">
+                <Label for="Ans6">@exam.Q06Navigation.QuesTitle</Label>
+                <input type="text" class="form-control" id="Ans6" name="Ans6" value="@Model.Ans6" disabled />
+                @if (exam.Q06Navigation.CorrectCh != null)
+                {
+                    <p>Correct Answer: @exam.Q06Navigation.CorrectCh</p>
+                }
+            </div>
+            <div class="form-group Exam">
+                <Label for="Ans7">@exam.Q07Navigation.QuesTitle</Label>
+                <input type="text" class="form-control" id="Ans7" name="Ans7" value="@Model.Ans7" disabled />
+                @if (exam.Q07Navigation.CorrectCh != null)
+                {
+                    <p>Correct Answer: @exam.Q07Navigation.CorrectCh</p>
+                }
+            </div>
+            <div class="form-group Exam">
+                <Label for="Ans8">@exam.Q08Navigation.QuesTitle</Label>
+                <input type="text" class="form-control" id="Ans8" name="Ans8" value="@Model.Ans8" disabled />
+                @if (exam.Q08Navigation.CorrectCh != null)
+                {
+                    <p>Correct Answer: @exam.Q08Navigation.CorrectCh</p>
+                }
+            </div>
+            <div class="form-group Exam">
+                <Label for="Ans9">@exam.Q09Navigation.QuesTitle</Label>
+                <input type="text" class="form-control" id="Ans9" name="Ans9" value="@Model.Ans9" disabled />
+                @if (exam.Q09Navigation.CorrectCh != null)
+                {
+                    <p>Correct Answer: @exam.Q09Navigation.CorrectCh</p>
+                }
+            </div>
+            <div class="form-group Exam">
+                <Label for="Ans10">@exam.Q10Navigation.QuesTitle</Label>
+                <input type="text" class="form-control" id="Ans10" name="Ans10" value="@Model.Ans10" disabled />
+                @if (exam.Q10Navigation.CorrectCh != null)
+                {
+                    <p>Correct Answer: @exam.Q10Navigation.CorrectCh</p>
+                }
+            </div>
+        }
+
+        <div class="form-group">
+            <Label for="AcheivedMark">Acheived Mark</Label>
+            @Html.TextBoxFor(m => m.AcheivedMark, new { @class = "form-control"}) / @ViewBag.TotalMark
+        </div>
+
+        <div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+    </form>
+</div>

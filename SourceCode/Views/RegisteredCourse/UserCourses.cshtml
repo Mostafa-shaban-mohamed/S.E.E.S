@@ -1,0 +1,33 @@
+@model SourceCode.Models.RegisteredCoursesTbl;
+
+@{
+    ViewData["Title"] = Model.Id;
+}
+
+<div class="grid-SEES col-md-9">
+    <div>
+        <table class="table-SEES">
+            <tr>
+                <th>Courses For: </th>
+                <th>Course (1) </th>
+                <th>Course (2) </th>
+                <th>Course (3) </th>
+                <th>Course (4) </th>
+                <th>Course (5) </th>
+                <th>Course (6) </th>
+                <th>Course (7) </th>
+
+            </tr>
+            <tr>
+                <td>@Model.Id</td>
+                <td><a asp-action="CourseDetails" class="btn btn-primary" asp-controller="Course" asp-route-id="@Model.Course01">@Model.Course01</a></td>
+                <td><a asp-action="CourseDetails" class="btn btn-primary" asp-controller="Course" asp-route-id="@Model.Course02">@Model.Course02</a></td>
+                <td><a asp-action="CourseDetails" class="btn btn-primary" asp-controller="Course" asp-route-id="@Model.Course03">@Model.Course03</a></td>
+                <td><a asp-action="CourseDetails" class="btn btn-primary" asp-controller="Course" asp-route-id="@Model.Course04">@Model.Course04</a></td>
+                <td><a asp-action="CourseDetails" class="btn btn-primary" asp-controller="Course" asp-route-id="@Model.Course05">@Model.Course05</a></td>
+                <td><a asp-action="CourseDetails" class="btn btn-primary" asp-controller="Course" asp-route-id="@Model.Course06">@Model.Course06</a></td>
+                <td><a asp-action="CourseDetails" class="btn btn-primary" asp-controller="Course" asp-route-id="@Model.Course07">@Model.Course07</a></td>
+            </tr>
+        </table>
+    </div>
+</div>

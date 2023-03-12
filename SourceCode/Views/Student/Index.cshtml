@@ -1,0 +1,29 @@
+@model IEnumerable<SourceCode.Models.StudentTbl>;
+
+@{
+    ViewData["Title"] = "Students";
+}
+
+<div class="grid-SEES col-md-9">
+    <div class="table-SEES">
+        <table class="table-SEES">
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Level</th>
+                <th>Class</th>
+            </tr>
+            @foreach (var std in Model)
+            {
+                <tr>
+                    <td>@std.Id</td>
+                    <td>@std.Name</td>
+                    <td>@std.Email</td>
+                    <td>@std.EdLevel</td>
+                    <td>@std.Class</td>
+                </tr>
+            }
+        </table>
+    </div>
+</div>

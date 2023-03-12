@@ -1,0 +1,56 @@
+@model SourceCode.Models.QuestionTbl
+@using SourceCode.Models
+
+@{
+    if(Model == null){
+        ViewData["Title"] = "Create a Question";
+    }else{
+        ViewData["Title"] = "Edit The Question";
+    }
+}
+<div class="crud-SEES col-md-9">
+    <form method="post" action="AddOrEditQuestion">
+        <div class="form-group">
+            @Html.LabelFor(m => m.QuesTitle)
+            @Html.TextBoxFor(m => m.QuesTitle, new {@class = "form-control", @required = true})
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.CourseId)
+            @Html.DropDownListFor(m => m.CourseId, ViewBag.Courses as SelectList, "Please Select type of Question", new
+            {@class = "form-control"})
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.QuesType)
+            @Html.DropDownListFor(m => m.QuesType, new QuesType().list, "Please Select type of Question", new {@class =
+            "form-control", @id="QuestionType"})
+        </div>
+        @* Depend on QuesType value, the fields will start to appear *@
+        <div class="form-group MultiChoice">
+            @Html.LabelFor(m => m.Ch01)
+            @Html.TextBoxFor(m => m.Ch01, new {@class = "form-control"})
+        </div>
+        <div class="form-group MultiChoice">
+            @Html.LabelFor(m => m.Ch02)
+            @Html.TextBoxFor(m => m.Ch02, new {@class = "form-control", @required = true})
+        </div>
+        <div class="form-group MultiChoice">
+            @Html.LabelFor(m => m.Ch03)
+            @Html.TextBoxFor(m => m.Ch03, new {@class = "form-control", @required = true})
+        </div>
+        <div class="form-group MultiChoice">
+            @Html.LabelFor(m => m.Ch04)
+            @Html.TextBoxFor(m => m.Ch04, new {@class = "form-control", @required = true})
+        </div>
+        <div class="form-group MultiChoice">
+            @Html.LabelFor(m => m.CorrectCh)
+            @Html.TextBoxFor(m => m.CorrectCh, new {@class = "form-control", @required = true})
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.TotalMark)
+            @Html.TextBoxFor(m => m.TotalMark, new {@class = "form-control", @type="number", @required = true})
+        </div>
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+    </form>
+</div>

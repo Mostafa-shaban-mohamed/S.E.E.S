@@ -1,0 +1,230 @@
+@model SourceCode.Models.AnswerTbl
+@using SourceCode.Models
+
+@{
+    ViewData["Title"] = "Take The Exam";
+
+    ExamTbl exam = ViewBag.Exam as ExamTbl;
+
+}
+
+<div class="crud-SEES col-md-9">
+    <h3>Exam</h3>
+    <form asp-action="TakeExam" method="post">
+        @Html.Hidden("ExamId", exam.ExamId)
+        <input type="hidden" id="ExamType" value="@exam.Type" />
+        <p><strong>Please Click Submit button before the time @exam.ReleaseTime.Value.ToString("HH:mm:ss")</strong></p>
+        <p style="text-align:center; font-size:x-large" id="countTime"></p>
+        <div class="form-group ">
+            <Label for="Ans1">@exam.Q01Navigation.QuesTitle</Label>
+            @if (exam.Q01Navigation.QuesType == "MultiChoice")
+            {
+                <div class="radio-group MultiChoice">
+                    <div id="radioItem"><input type="radio" name="Ans1" value="@exam.Q01Navigation.Ch01" /> @exam.Q01Navigation.Ch01</div>
+                    <div id="radioItem"><input type="radio" name="Ans1" value="@exam.Q01Navigation.Ch02" /> @exam.Q01Navigation.Ch02</div>
+                    <div id="radioItem"><input type="radio" name="Ans1" value="@exam.Q01Navigation.Ch03" /> @exam.Q01Navigation.Ch03</div>
+                    <div id="radioItem"><input type="radio" name="Ans1" value="@exam.Q01Navigation.Ch04" /> @exam.Q01Navigation.Ch04</div>
+                </div>
+            }
+            else
+            {
+                @Html.TextAreaFor(m => m.Ans1, new {@class = "form-control"})
+            }
+        </div>
+
+        <div class="form-group">
+            <Label for="Ans2">@exam.Q02Navigation.QuesTitle</Label>
+            @if (exam.Q02Navigation.QuesType == "MultiChoice")
+            {
+                <div class="radio-group MultiChoice">
+                    <div id="radioItem"><input type="radio" name="Ans2" value="@exam.Q02Navigation.Ch01" /> @exam.Q02Navigation.Ch01</div>
+                    <div id="radioItem"><input type="radio" name="Ans2" value="@exam.Q02Navigation.Ch02" /> @exam.Q02Navigation.Ch02</div>
+                    <div id="radioItem"><input type="radio" name="Ans2" value="@exam.Q02Navigation.Ch03" /> @exam.Q02Navigation.Ch03</div>
+                    <div id="radioItem"><input type="radio" name="Ans2" value="@exam.Q02Navigation.Ch04" /> @exam.Q02Navigation.Ch04</div>
+                </div>
+            }
+            else
+            {
+                @Html.TextAreaFor(m => m.Ans2, new {@class = "form-control"})
+            }
+        </div>
+
+        <div class="form-group">
+            <Label for="Ans3">@exam.Q03Navigation.QuesTitle</Label>
+            @if (exam.Q03Navigation.QuesType == "MultiChoice")
+            {
+                <div class="radio-group MultiChoice">
+                    <div id="radioItem"><input type="radio" name="Ans3" value="@exam.Q03Navigation.Ch01" /> @exam.Q03Navigation.Ch01</div>
+                    <div id="radioItem"><input type="radio" name="Ans3" value="@exam.Q03Navigation.Ch02" /> @exam.Q03Navigation.Ch02</div>
+                    <div id="radioItem"><input type="radio" name="Ans3" value="@exam.Q03Navigation.Ch03" /> @exam.Q03Navigation.Ch03</div>
+                    <div id="radioItem"><input type="radio" name="Ans3" value="@exam.Q03Navigation.Ch04" /> @exam.Q03Navigation.Ch04</div>
+                </div>
+            }
+            else
+            {
+                @Html.TextAreaFor(m => m.Ans3, new {@class = "form-control"})
+            }
+        </div>
+
+        <div class="form-group">
+            <Label for="Ans4">@exam.Q04Navigation.QuesTitle</Label>
+            @if (exam.Q04Navigation.QuesType == "MultiChoice")
+            {
+                <div class="radio-group MultiChoice">
+                    <div id="radioItem"><input type="radio" name="Ans4" value="@exam.Q04Navigation.Ch01" /> @exam.Q04Navigation.Ch01</div>
+                    <div id="radioItem"><input type="radio" name="Ans4" value="@exam.Q04Navigation.Ch02" /> @exam.Q04Navigation.Ch02</div>
+                    <div id="radioItem"><input type="radio" name="Ans4" value="@exam.Q04Navigation.Ch03" /> @exam.Q04Navigation.Ch03</div>
+                    <div id="radioItem"><input type="radio" name="Ans4" value="@exam.Q04Navigation.Ch04" /> @exam.Q04Navigation.Ch04</div>
+                </div>
+            }
+            else
+            {
+                @Html.TextAreaFor(m => m.Ans4, new {@class = "form-control"})
+            }
+        </div>
+
+        <div class="form-group">
+            <Label for="Ans5">@exam.Q05Navigation.QuesTitle</Label>
+            @if (exam.Q05Navigation.QuesType == "MultiChoice")
+            {
+                <div class="radio-group MultiChoice">
+                    <div id="radioItem"><input type="radio" name="Ans5" value="@exam.Q05Navigation.Ch01" /> @exam.Q05Navigation.Ch01</div>
+                    <div id="radioItem"><input type="radio" name="Ans5" value="@exam.Q05Navigation.Ch02" /> @exam.Q05Navigation.Ch02</div>
+                    <div id="radioItem"><input type="radio" name="Ans5" value="@exam.Q05Navigation.Ch03" /> @exam.Q05Navigation.Ch03</div>
+                    <div id="radioItem"><input type="radio" name="Ans5" value="@exam.Q05Navigation.Ch04" /> @exam.Q05Navigation.Ch04</div>
+                </div>
+            }
+            else
+            {
+                @Html.TextAreaFor(m => m.Ans5, new {@class = "form-control"})
+            }
+        </div>
+
+        @* Exam Questions *@
+        @if (exam.Type == "Exam")
+        {
+            <div class="form-group Exam">
+                <Label for="Ans6">@exam.Q06Navigation.QuesTitle</Label>
+                @if (exam.Q06Navigation.QuesType == "MultiChoice")
+                {
+                    <div class="radio-group MultiChoice">
+                        <div id="radioItem"><input type="radio" name="Ans6" value="@exam.Q06Navigation.Ch01" /> @exam.Q06Navigation.Ch01</div>
+                        <div id="radioItem"><input type="radio" name="Ans6" value="@exam.Q06Navigation.Ch02" /> @exam.Q06Navigation.Ch02</div>
+                        <div id="radioItem"><input type="radio" name="Ans6" value="@exam.Q06Navigation.Ch03" /> @exam.Q06Navigation.Ch03</div>
+                        <div id="radioItem"><input type="radio" name="Ans6" value="@exam.Q06Navigation.Ch04" /> @exam.Q06Navigation.Ch04</div>
+                    </div>
+                }
+                else
+                {
+                    @Html.TextAreaFor(m => m.Ans6, new {@class = "form-control"})
+                }
+            </div>
+            <div class="form-group Exam">
+                <Label for="Ans7">@exam.Q07Navigation.QuesTitle</Label>
+                @if (exam.Q07Navigation.QuesType == "MultiChoice")
+                {
+                    <div class="radio-group MultiChoice">
+                        <div id="radioItem"><input type="radio" name="Ans7" value="@exam.Q07Navigation.Ch01" /> @exam.Q07Navigation.Ch01</div>
+                        <div id="radioItem"><input type="radio" name="Ans7" value="@exam.Q07Navigation.Ch02" /> @exam.Q07Navigation.Ch02</div>
+                        <div id="radioItem"><input type="radio" name="Ans7" value="@exam.Q07Navigation.Ch03" /> @exam.Q07Navigation.Ch03</div>
+                        <div id="radioItem"><input type="radio" name="Ans7" value="@exam.Q07Navigation.Ch04" /> @exam.Q07Navigation.Ch04</div>
+                    </div>
+                }
+                else
+                {
+                    @Html.TextAreaFor(m => m.Ans7, new {@class = "form-control"})
+                }
+            </div>
+            <div class="form-group Exam">
+                <Label for="Ans8">@exam.Q08Navigation.QuesTitle</Label>
+                @if (exam.Q08Navigation.QuesType == "MultiChoice")
+                {
+                    <div class="radio-group MultiChoice">
+                        <div id="radioItem"><input type="radio" name="Ans8" value="@exam.Q08Navigation.Ch01" /> @exam.Q08Navigation.Ch01</div>
+                        <div id="radioItem"><input type="radio" name="Ans8" value="@exam.Q08Navigation.Ch02" /> @exam.Q08Navigation.Ch02</div>
+                        <div id="radioItem"><input type="radio" name="Ans8" value="@exam.Q08Navigation.Ch03" /> @exam.Q08Navigation.Ch03</div>
+                        <div id="radioItem"><input type="radio" name="Ans8" value="@exam.Q08Navigation.Ch04" /> @exam.Q08Navigation.Ch04</div>
+                    </div>
+                }
+                else
+                {
+                    @Html.TextAreaFor(m => m.Ans8, new {@class = "form-control"})
+                }
+            </div>
+            <div class="form-group Exam">
+                <Label for="Ans9">@exam.Q09Navigation.QuesTitle</Label>
+                @if (exam.Q09Navigation.QuesType == "MultiChoice")
+                {
+                    <div class="radio-group MultiChoice">
+                        <div id="radioItem"><input type="radio" name="Ans9" value="@exam.Q09Navigation.Ch01" /> @exam.Q09Navigation.Ch01</div>
+                        <div id="radioItem"><input type="radio" name="Ans9" value="@exam.Q09Navigation.Ch02" /> @exam.Q09Navigation.Ch02</div>
+                        <div id="radioItem"><input type="radio" name="Ans9" value="@exam.Q09Navigation.Ch03" /> @exam.Q09Navigation.Ch03</div>
+                        <div id="radioItem"><input type="radio" name="Ans9" value="@exam.Q09Navigation.Ch04" /> @exam.Q09Navigation.Ch04</div>
+                    </div>
+                }
+                else
+                {
+                    @Html.TextAreaFor(m => m.Ans9, new {@class = "form-control"})
+                }
+            </div>
+            <div class="form-group Exam">
+                <Label for="Ans10">@exam.Q10Navigation.QuesTitle</Label>
+                @if (exam.Q10Navigation.QuesType == "MultiChoice")
+                {
+                    <div class="radio-group MultiChoice">
+                        <div id="radioItem"><input type="radio" name="Ans10" value="@exam.Q10Navigation.Ch01" /> @exam.Q10Navigation.Ch01</div>
+                        <div id="radioItem"><input type="radio" name="Ans10" value="@exam.Q10Navigation.Ch02" /> @exam.Q10Navigation.Ch02</div>
+                        <div id="radioItem"><input type="radio" name="Ans10" value="@exam.Q10Navigation.Ch03" /> @exam.Q10Navigation.Ch03</div>
+                        <div id="radioItem"><input type="radio" name="Ans10" value="@exam.Q10Navigation.Ch04" /> @exam.Q10Navigation.Ch04</div>
+                    </div>
+                }
+                else
+                {
+                    @Html.TextAreaFor(m => m.Ans10, new {@class = "form-control"})
+                }
+            </div>
+        }
+        <div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+    </form>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        alert("Exam Rules: you aren't allowed to switch screen or your answer will be submitted as it is.");
+        var sw = 0; //browser switch
+        var deadline = new Date("@exam.ReleaseTime.Value.ToString()");
+        var nowDate = new Date();
+        var Miliseconds = Math.abs(deadline.getTime() - nowDate.getTime());
+        //CountDown
+        var countdown = Miliseconds;
+        var timerId = setInterval(function () {
+            countdown -= 1000;
+            var min = Math.floor(countdown / (60 * 1000));
+            var sec = Math.floor((countdown - (min * 60 * 1000)) / 1000);
+            if (countdown <= 0) {
+                alert("30 min!");
+                clearInterval(timerId);
+                //Sumbit Answers
+                $("button").click();
+            } else {
+                document.getElementById("countTime").innerHTML = min + " : " + sec;
+            }
+        }, 1000); //1000ms. = 1sec.
+        //on clicking back or reload page
+        window.onbeforeunload = function (e) {
+            $("button").click();
+        }
+        $(window).focus(function () {
+            //do something
+            if (sw >= 2) {
+                $("button").click();
+            }
+        });
+        $(window).blur(function () {
+            //do something
+            sw += 1;
+        })
+    });
+</script>

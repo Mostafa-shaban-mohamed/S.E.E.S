@@ -1,0 +1,23 @@
+@model SourceCode.Models.FileDataViewModel
+
+@{
+    ViewData["Title"] = "New File";
+}
+
+<div class="col-md-9 crud-SEES">
+    @using (Html.BeginForm("UploadFiles", "Course", FormMethod.Post, new { enctype = "multipart/form-data", @class = "margin_30_95 centered-form" }))
+    {
+        <div>
+            @Html.HiddenFor(x => x.id)
+            <div class="form-group">
+                <label asp-for="File">File</label>
+                @Html.TextBoxFor(x => x.File, new { type = "file", @class="form-control" })
+                @Html.ValidationMessageFor(x => x.File)
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary">Upload</button> &emsp;
+                <a asp-action="CourseFiles" asp-route-itemid="@Model.id" class="btn btn-primary">Cancel</a>
+            </div>
+        </div>
+}
+</div>

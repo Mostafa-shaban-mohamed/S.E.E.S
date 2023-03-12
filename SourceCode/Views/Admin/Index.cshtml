@@ -1,0 +1,51 @@
+@model PaginatedList<SourceCode.Models.AdminTbl>;
+
+@{
+    ViewData["Title"] = "Admins";
+}
+
+<div class="grid-SEES col-md-9">
+    <form asp-action="Index" method="get">
+        <div class="form-actions no-color">
+            <p>
+                Find by Email Or ID <input type="text" name="SearchString" class="search-box" value="@ViewData["CurrentFilter"]" /> &emsp;
+                <input type="submit" value="Search" class="btn btn-primary" /> &emsp;
+                <a asp-action="Index" class="btn btn-primary">Full List</a>
+            </p>
+        </div>
+    </form>
+    <table class="table-SEES">
+        <tr>
+            <th>ID</th>
+            <th>Email</th>
+        </tr>
+        @foreach (var admin in Model)
+        {
+            <tr>
+                <td>@admin.Id</td>
+                <td>@admin.Email</td>
+            </tr>
+        }
+    </table>
+    @{
+        //paging variables for arrows
+        var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+        var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+    }
+
+    <div class="paging-btn-SEES">
+        <a asp-action="Index"
+            asp-route-sortOrder="@ViewData["CurrentSort"]"
+            asp-route-pageNumber="@(Model.PageIndex - 1)"
+            asp-route-currentFilter="@ViewData["CurrentFilter"]"
+            class="btn btn-primary @prevDisabled">Previous
+        </a> &emsp;
+
+        <a asp-action="Index"
+            asp-route-sortOrder="@ViewData["CurrentSort"]"
+            asp-route-pageNumber="@(Model.PageIndex + 1)"
+            asp-route-currentFilter="@ViewData["CurrentFilter"]"
+            class="btn btn-primary @nextDisabled">Next
+        </a>
+    </div>
+</div>

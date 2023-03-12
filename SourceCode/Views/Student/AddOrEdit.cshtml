@@ -1,0 +1,56 @@
+@model SourceCode.Models.StudentTbl
+@using SourceCode.Models
+
+@{
+    if (Model != null) { ViewData["Title"] = Model.Name; }
+    else { ViewData["Title"] = "Sign Up for Students"; }
+}
+
+<div class="col-md-9 crud-SEES">
+    <form asp-action="AddOrEdit" method="post">
+        <div class="form-group">
+            <label asp-for="Id">Student ID</label>
+            <input asp-for="Id" class="form-control" placeholder="Please Enter Your ID" required />
+        </div>
+        <div class="form-group">
+            <label asp-for="Name">Name</label>
+            <input asp-for="Name" class="form-control" placeholder="Please Enter Your Name" required />
+        </div>
+        <div class="form-group">
+            <label asp-for="Email">Email</label>
+            <input asp-for="Email" type="email" class="form-control" placeholder="Please Enter Your Email" required />
+        </div>
+        @if (Model == null)
+        { @* Available only for Creating new student process *@
+            <div class="form-group">
+                <label asp-for="Password">Password</label>
+                <input asp-for="Password" type="password" class="form-control" placeholder="Please Enter the Password"
+                    required />
+            </div>
+        }
+        else
+        {
+            @Html.HiddenFor(m => m.Password)
+            @Html.HiddenFor(m => m.Salt)
+        }
+        <div class="form-group">
+            <label asp-for="Class">Class</label>
+            @Html.DropDownListFor(model => model.Class, new SelectListItem[]
+            {
+            // First item different to the remaining range.
+            new SelectListItem ("Class A", "Class A"),
+            new SelectListItem ("Class B", "Class B"),
+            new SelectListItem ("Class C", "Class C")
+            }, new { @class = "form-control"} )
+        </div>
+        <div class="form-group">
+            <label asp-for="EdLevel">Level</label>
+            @Html.DropDownListFor(model => model.EdLevel, new EdList().list, new { @class = "form-control"} )
+        </div>
+        <br />
+        <div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+    </form>
+</div>
+

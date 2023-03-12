@@ -1,0 +1,25 @@
+@model IEnumerable<SourceCode.Models.AnswerTbl>
+@{
+    ViewData["Title"] = "Answer Paper";
+}
+
+<div class="grid-SEES">
+    <h3>Answer Papers</h3>
+    <div>
+        <table class="table-SEES">
+            <tr>
+                <th>Exam ID</th>
+                <th>Student ID</th>
+                <th></th>
+            </tr>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.ExamId</td>
+                <td>@item.StuCode</td>
+                <td>@Html.ActionLink("Grade Answers", "GradeAnswer", new { id = item.AnsId }, new {@class = "btn btn-primary"})</td>
+            </tr>
+        }
+        </table>
+    </div>
+</div>

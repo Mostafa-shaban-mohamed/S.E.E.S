@@ -1,0 +1,31 @@
+@model IEnumerable<SourceCode.Models.FileTbl>;
+@{
+    ViewData["Title"] = "Files";
+}
+<div class="grid-SEES col-md-9">
+    @if(User.IsInRole("Lecturer")){
+        <div>
+            @Html.ActionLink("Add New File", "UploadFiles", "Course", new { id = ViewData["CourseID"]}, new {@class = "btn btn-primary"})
+        </div>
+    }
+    <div>
+        <table class="table-SEES">
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Upload Date</th>
+                <th></th>
+            </tr>
+        @foreach (var file in Model)
+        {
+            <tr>
+                <td>@file.Id</td>
+                <td>@file.FileName</td>
+                <td>@file.UploadOn</td>
+                <td>@Html.ActionLink("Download", "ViewFile", new { Name = file.FileName}, new { @class = "btn btn-primary"})</td>
+            </tr>
+        }
+        </table>
+    </div>
+</div>
+

@@ -1,0 +1,91 @@
+@model SourceCode.Models.ExamTbl
+
+@{
+    if(Model != null){
+        ViewData["Title"] = "Edit Exam";
+    }else{
+        ViewData["Title"] = "Create new Exam";
+    }
+}
+
+<div class="col-md-9 crud-SEES">
+    <form method="post" action="CreateOrEditExam">
+        @Html.HiddenFor(m => m.ExamId)
+        @Html.HiddenFor(m => m.Teacher)
+        <div class="form-group">
+            <label asp-for="CourseId">Course ID</label>
+            @Html.DropDownListFor(m => m.CourseId, ViewBag.Courses as SelectList, new {@class = "form-control"})
+        </div>
+        <div class="form-group">
+            <label asp-for="EdLevel">Level</label>
+            @Html.DropDownListFor(m => m.EdLevel, new EdList(User.Identity.Name).list, new {@class = "form-control"})
+        </div>
+        <div class="form-group">
+            <label asp-for="Type">Test Type</label>
+            @Html.DropDownListFor(m => m.Type, new SelectListItem[] {
+                new SelectListItem("Quiz", "Quiz"),
+                new SelectListItem("Exam", "Exam")
+            }, new {@class = "form-control", @id = "ExamType"})
+        </div>
+    @* Questions *@
+    @* Quiz has 5 Questions *@
+    <div class="form-group">
+        <label asp-for="Q01">Q01</label>
+        @Html.DropDownListFor(m => m.Q01, ViewBag.Questions as SelectList, new {@class = "form-control"})
+    </div>
+    <div class="form-group">
+        <label asp-for="Q02">Q02</label>
+        @Html.DropDownListFor(m => m.Q02, ViewBag.Questions as SelectList, new {@class = "form-control"})
+    </div>
+    <div class="form-group">
+        <label asp-for="Q03">Q03</label>
+        @Html.DropDownListFor(m => m.Q03, ViewBag.Questions as SelectList, new {@class = "form-control"})
+    </div>
+    <div class="form-group">
+        <label asp-for="Q04">Q04</label>
+        @Html.DropDownListFor(m => m.Q04, ViewBag.Questions as SelectList, new {@class = "form-control"})
+    </div>
+    <div class="form-group">
+        <label asp-for="Q05">Q05</label>
+        @Html.DropDownListFor(m => m.Q05, ViewBag.Questions as SelectList, new {@class = "form-control"})
+    </div>
+    @* Exam has 10 Questions *@
+    <div class="form-group Exam">
+        <label asp-for="Q06">Q06</label>
+        @Html.DropDownListFor(m => m.Q06, ViewBag.Questions as SelectList, new {@class = "form-control"})
+    </div>
+    <div class="form-group Exam">
+        <label asp-for="Q07">Q07</label>
+        @Html.DropDownListFor(m => m.Q07, ViewBag.Questions as SelectList, new {@class = "form-control"})
+    </div>
+    <div class="form-group Exam">
+        <label asp-for="Q08">Q08</label>
+        @Html.DropDownListFor(m => m.Q08, ViewBag.Questions as SelectList, new {@class = "form-control"})
+    </div>
+    <div class="form-group Exam">
+        <label asp-for="Q09">Q09</label>
+        @Html.DropDownListFor(m => m.Q09, ViewBag.Questions as SelectList, new {@class = "form-control"})
+    </div>
+    <div class="form-group Exam">
+        <label asp-for="Q10">Q10</label>
+        @Html.DropDownListFor(m => m.Q10, ViewBag.Questions as SelectList, new {@class = "form-control"})
+    </div>
+    <div class="form-group">
+        <label asp-for="AvailabilityTime">Availability To</label>
+        @if (Model != null)
+        {
+            @Html.TextBox("AvailabilityTime", Model.AvailabilityTime,
+                Model.AvailabilityTime.Value.ToString("yyyy-MM-ddTHH:mm"), 
+                new {@class = "form-control", @type = "datetime-local", @required = true}
+            )    
+        }else{
+            @Html.TextBoxFor(m => m.AvailabilityTime, new {@class = "form-control", @type = "datetime-local"})
+        }
+        
+    </div>
+    <div>
+        <button type="submit" class="btn btn-primary">Submit</button> &emsp;
+        @Html.ActionLink("Back To List", "IndexExam", "Examination", null, new { @class = "btn btn-primary" })
+    </div>
+</form>
+</div>

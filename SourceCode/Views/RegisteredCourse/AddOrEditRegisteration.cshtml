@@ -1,0 +1,60 @@
+@model SourceCode.Models.RegisteredCoursesTbl
+@using SourceCode.Models
+
+@{
+    if(Model != null)
+    {
+        ViewData["Title"] = Model.Id;    
+    } else {
+        ViewData["Title"] = "Create New Registration";
+    }
+}
+
+<div class="col-md-9 crud-SEES">
+    <form asp-action="AddOrEditRegisteration" method="post">
+        <div class="form-group">
+            <label asp-for="Id">Level</label>
+            @Html.DropDownListFor(model => model.Id, new EdList().list, new { @class = "form-control"} )  
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Course01">Course (1)</label>
+            @Html.DropDownList("Course01", ViewBag.Courses as SelectList,  new { @class = "form-control"} )  
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Course02">Course (2)</label>
+            @Html.DropDownList("Course02", ViewBag.Courses as SelectList,  new { @class = "form-control"} )  
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Course03">Course (3)</label>
+            @Html.DropDownList("Course03", ViewBag.Courses as SelectList,  new { @class = "form-control"} )  
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Course04">Course (4)</label>
+            @Html.DropDownList("Course04", ViewBag.Courses as SelectList,  new { @class = "form-control"} )  
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Course05">Course (5)</label>
+            @Html.DropDownList("Course05", ViewBag.Courses as SelectList,  new { @class = "form-control"} )  
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Course06">Course (6)</label>
+            @Html.DropDownList("Course06", ViewBag.Courses as SelectList,  new { @class = "form-control"} )  
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Course07">Course (7)</label>
+            @Html.DropDownList("Course07", ViewBag.Courses as SelectList,  new { @class = "form-control"} )  
+        </div>
+
+        <div>
+            <button type="submit" class="btn btn-primary">Submit</button> &emsp;
+            @Html.ActionLink("Back To List", "Index", "RegisteredCourse", null, new { @class = "btn btn-primary" })
+        </div>
+    </form>
+</div>

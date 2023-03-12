@@ -1,0 +1,41 @@
+@model SourceCode.Models.LoginViewModel
+
+@{
+    ViewData["Title"] = "Login";
+}
+
+<div class="form-section-SEES">
+    <div>
+        <form asp-action="Login" method="post">
+            <div class="form-group">
+                <label asp-for="UserRole">Your Role</label>
+                @Html.DropDownListFor(model => model.UserRole, new SelectListItem[]
+                {
+                // First item different to the remaining range.
+                new SelectListItem ("Student", "Student"),
+                new SelectListItem ("Admin", "Admin"),
+                new SelectListItem ("Lecturer", "Lecturer")
+                }, new { @class = "form-control"} )
+            </div>
+            <div class="form-group">
+                <label asp-for="Email">Email</label>
+                <input asp-for="Email" type="email" class="form-control" placeholder="Please Enter Your Email" required/>
+            </div>
+            <div class="form-group">
+                <label asp-for="Password">Password</label>
+                <input asp-for="Password" type="password" class="form-control"
+                    placeholder="Please Enter the Password" required/>
+            </div>
+            <br />
+            <div>
+                <input type="submit" class="btn btn-primary" value="Login" />
+            </div>
+        </form>
+        <br />
+        <p>If you are a Student and you don't have an account, Click @Html.ActionLink("Here", "AddOrEdit", "Student")</p>
+        <p>If you are a Teacher and you don't have an account, Click @Html.ActionLink("Here", "AddOrEdit", "Lecturer")</p>
+    </div>
+    <div>
+        <img class="form-image-SEES" src="~/img/SeeS_logo.png" alt="SEES_Logo" />
+    </div>
+</div>

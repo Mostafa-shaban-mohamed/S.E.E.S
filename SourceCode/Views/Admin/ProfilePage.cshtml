@@ -1,0 +1,27 @@
+@model SourceCode.Models.AdminTbl
+
+@{
+    ViewData["Title"] = "Admin";
+}
+
+<div class="col-md-9 display-SEES">
+    <div>
+        <div class="display-group-SEES">
+            <p class="display-text-SEES">Admin ID</p>
+            <p class="display-text-SEES">@Model.Id</p>
+        </div>
+        <div class="display-group-SEES">
+            <p class="display-text-SEES">Email</p>
+            <p class="display-text-SEES">@Model.Email</p>
+        </div>
+        <div class="display-btn-group-SEES">
+            @Html.ActionLink("Students List", "Index", "Student", null, new { @class = "btn btn-primary"})
+            &emsp;
+            @Html.ActionLink("Lecturers List", "Index", "Lecturer", null, new { @class = "btn btn-primary"}) 
+            &emsp;
+            @Html.ActionLink("Admins List", "Index", "Admin", null, new { @class = "btn btn-primary"})
+            &emsp;
+            @Html.ActionLink("Set Students Course", "SetRegisteredCoursesStudent", "Admin", null, new { @class = "btn btn-primary"})
+        </div>
+    </div>
+</div>

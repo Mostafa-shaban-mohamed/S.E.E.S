@@ -1,0 +1,25 @@
+@model IEnumerable<SourceCode.Models.StudentTbl>
+
+@{
+    ViewData["Title"] = "Attendance of " + ViewBag.courseID + " Class";
+}
+
+
+<div class="col-md-9 crud-SEES">
+    <h3>Take Attendance of Course @ViewBag.courseID</h3>
+    <form asp-action="CreateAttendance" method="post">
+        <input type="hidden" id="courseID" name="courseID" value="@ViewBag.courseID" />
+            
+            @foreach (var item in Model)
+            {
+                <div class="form-group">
+                    <label style="float: none;" for="@item.Id">@item.Name</label>
+                    <input type="checkbox" id="@item.Id" name="studentsID" value="@item.Id">
+                </div>    
+            }
+            
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary">Take Attendance</button>
+        </div>
+    </form>
+</div>

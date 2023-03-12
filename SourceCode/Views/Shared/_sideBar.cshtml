@@ -1,0 +1,47 @@
+@using SourceCode.Models
+
+@{
+    string role = "";
+    string name = "";
+    string edLvl = "";
+    string id = "";
+    using (var lmsdb = new LmsdbContext())
+    {
+        if(User.Identity != null && User.IsInRole("Student")){
+            var user = lmsdb.StudentTbls.First(m => m.Email == User.Identity.Name); 
+            role = "Student"; name = user.Name; edLvl = user.EdLevel;
+        }else if(User.Identity != null && User.IsInRole("Lecturer")){
+            var user = lmsdb.LecturerTbls.First(m => m.Email == User.Identity.Name); 
+            role = "Lecturer"; name = user.Name; id = user.Id;
+        }else{
+            role = "Admin";
+        }
+    }
+}
+
+<div id="sidebar" class="sidebar-SEES col-md-3">
+    <h3 class="header-menu-SEES">@role Menu</h3>
+    <ul class="menu-SEES">
+        <a asp-action="ProfilePage" asp-controller="@role">
+            <li class="item-menu-SEES">My Profile</li>
+        </a>
+        <a asp-action="IndexExam" asp-controller="Examination">
+            <li class="item-menu-SEES">Exams</li>
+        </a>
+        <a asp-action="Index" asp-controller="Event">
+            <li class="item-menu-SEES">Events</li>
+        </a>
+        <a asp-action="NotifyList" asp-controller="Notification">
+            <li class="item-menu-SEES">Notifications</li>
+        </a>
+        @if(User.IsInRole("Student")){
+            <a asp-action="UserCourses" asp-controller="RegisteredCourse" asp-route-EdLevel="@edLvl">
+                <li class="item-menu-SEES">My Courses</li>
+            </a>
+        }else{
+            <a asp-action="Index" asp-controller="Course" asp-route-id="@id">
+                <li class="item-menu-SEES">Courses</li>
+            </a>
+        }
+    </ul>
+</div>

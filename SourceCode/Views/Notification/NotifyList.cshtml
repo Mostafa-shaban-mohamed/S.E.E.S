@@ -1,0 +1,23 @@
+@model IEnumerable<SourceCode.Models.NotificationTbl>;
+
+@{
+    ViewData["Title"] = "Notifications";
+}
+
+<div class="grid-SEES col-md-9">
+    <div>
+        <table class="table-SEES">
+            <tr>
+                <th>Description</th>
+                <th>Release Time</th>
+            </tr>
+            @foreach (var not in Model)
+            {
+                <tr>
+                    <td>@not.Description</td>
+                    <td>@not.ReleaseDate</td>
+                </tr>
+            }
+        </table>
+    </div>
+</div>
